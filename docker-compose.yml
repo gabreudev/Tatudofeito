@@ -1,0 +1,20 @@
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=tatudofeito_db'
+      - 'POSTGRES_PASSWORD=tatudofeito_password'
+      - 'POSTGRES_USER=tatudofeito_user'
+    ports:
+      - "5432:5432"
+
+  pgadmin:
+    image: 'dpage/pgadmin4:latest'
+    environment:
+      - 'PGADMIN_DEFAULT_EMAIL=biel0alves0@gmail.com'
+      - 'PGADMIN_DEFAULT_PASSWORD=admin'
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
