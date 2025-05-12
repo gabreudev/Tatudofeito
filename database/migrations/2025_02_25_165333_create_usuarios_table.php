@@ -18,8 +18,8 @@ class CreateUsuariosTable extends Migration {
             $table->float('average_rating')->default(0)->nullable();
             $table->string('payment_methods')->nullable();
             $table->float('daily_value')->nullable();
-            $table->text('descricription')->nullable();
-            $table->boolean('is_baned')->default(false);
+            $table->text('description')->nullable();
+            $table->boolean('is_banned')->default(false);
             $table->boolean('email_verified')->default(false);
             $table->timestamps();
         });
