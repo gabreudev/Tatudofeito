@@ -10,6 +10,7 @@ class CreateServicosTable extends Migration {
             $table->id();
             $table->foreignId('client_id')->constrained('users');
             $table->foreignId('worker_id')->constrained('users');
+            $table->string('status');
             $table->text('description');
             $table->timestamps();
         });
