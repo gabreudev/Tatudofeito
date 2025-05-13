@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class ServicoController extends Controller
@@ -11,7 +12,11 @@ class ServicoController extends Controller
      */
     public function index()
     {
-        //
+        $servicos = Service::all();
+        // Caso vá usar paginação, utilizar a função
+        // $servicos = Service::latest()->paginate(10);
+
+        return view('servicos.index', compact('servicos'));
     }
 
     /**
