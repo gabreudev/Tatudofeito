@@ -23,9 +23,12 @@ class ServicoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $clientId = $request->input('client_id');
+        $workerId = $request->input('worker_id');
+
+        return view('servicos.create', compact("clientId", "workerId"));
     }
 
     /**
@@ -33,7 +36,16 @@ class ServicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:users,id',
+            'worker_id' => 'required|exists:users,id',
+            'status' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $service = Service::create($validated);
+
+        return redirect()->route('servicos.index')->with('success', 'Serviço criado com sucesso!');
     }
 
     /**
