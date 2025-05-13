@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
+
 class ServicoController extends Controller
 {
     /**
@@ -67,8 +68,9 @@ class ServicoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Service $servico)
     {
-        //
+        $servico->delete();
+        return redirect()->route('servicos.index')->with('success', 'Serviço excluído com sucesso!');
     }
 }
