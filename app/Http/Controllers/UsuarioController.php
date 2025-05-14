@@ -49,11 +49,7 @@ class UsuarioController extends Controller
         $user = User::create([
             'name' => $validated['name'],
             'cpf' => $validated['cpf'] ?? null,
-            '
-            
-            
-            
-            phone' => $validated['phone'] ?? null,
+            'phone' => $validated['phone'] ?? null,
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
@@ -79,7 +75,7 @@ class UsuarioController extends Controller
     {
 
         try {
-            $this->authorize('view', User::class);
+            // $this->authorize('view', User::class);
             $user = User::findOrFail($id);
             return view('usuarios.show', compact('user'));
             
@@ -172,14 +168,9 @@ class UsuarioController extends Controller
      */
     public function destroy(User $usuario)
     {
-        try {
-            $this->authorize('delete', User::class); // Verifica permissão
-    
-            // Encontrar o usuário pelo ID
-            $user = User::findOrFail($id);
-    
+        try {    
             // Deletar o usuário
-            $user->delete();
+            $usuario->delete();
     
             // Redirecionar com mensagem de sucesso
             return redirect()->route('usuarios.index')->with('success', 'Usuário deletado com sucesso!');
