@@ -26,14 +26,14 @@
         <div class="form-group">
             <label for="cpf">CPF:</label>
             <input type="text" id="cpf" name="cpf" value="{{ old('cpf', $usuario->cpf) }}" 
-                   required maxlength="14" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                   required maxlength="14">
             <small>Formato: 000.000.000-00</small>
         </div>
         
         <div class="form-group">
             <label for="phone">Telefone:</label>
             <input type="text" id="phone" name="phone" value="{{ old('phone', $usuario->phone) }}" 
-                   required maxlength="15" pattern="\(\d{2}\)\s\d{4,5}-\d{4}">
+                   required maxlength="15">
             <small>Formato: (00) 00000-0000</small>
         </div>
         
