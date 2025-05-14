@@ -11,7 +11,7 @@
 </div>
 @endif
 
-<form action="{{ route('services.update') }}" method="POST">
+<form action="{{ route('servicos.edit') }}" method="POST">
     @csrf
     @method('PUT')
 
@@ -29,11 +29,4 @@
     <textarea name="description" rows="4" required>{{ old('description', $service->description) }}</textarea>
 
     <button type="submit">Salvar</button>
-
-</form>
-
-<form action="{{ route('services.destroy', $service->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este serviço?');">
-    @csrf
-    @method('DELETE')
-    <button type="submit" style="color: red;">Excluir Serviço</button>
 </form>
