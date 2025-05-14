@@ -13,7 +13,8 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all(); 
+        return view('usuarios.index', compact('usuarios'));
     }
 
     /**
@@ -198,7 +199,7 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $usuario)
     {
         //
     }
