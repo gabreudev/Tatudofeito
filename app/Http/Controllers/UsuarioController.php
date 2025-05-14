@@ -49,7 +49,11 @@ class UsuarioController extends Controller
         $user = User::create([
             'name' => $validated['name'],
             'cpf' => $validated['cpf'] ?? null,
-            'phone' => $validated['phone'] ?? null,
+            '
+            
+            
+            
+            phone' => $validated['phone'] ?? null,
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
@@ -67,10 +71,21 @@ class UsuarioController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\Response
      */
     public function show(string $id)
     {
-        //
+
+        try {
+            $this->authorize('view', User::class);
+            $user = User::findOrFail($id);
+            return view('usuarios.show', compact('user'));
+            
+        } catch (\Exception $e) {
+            return redirect()->route('usuarios.index')->with('error', 'Erro ao exibir usuário: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -198,9 +213,26 @@ class UsuarioController extends Controller
     }
     /**
      * Remove the specified resource from storage.
+     *
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $usuario)
     {
-        //
+        try {
+            $this->authorize('delete', User::class); // Verifica permissão
+    
+            // Encontrar o usuário pelo ID
+            $user = User::findOrFail($id);
+    
+            // Deletar o usuário
+            $user->delete();
+    
+            // Redirecionar com mensagem de sucesso
+            return redirect()->route('usuarios.index')->with('success', 'Usuário deletado com sucesso!');
+
+        } catch (\Exception $e) {
+            return redirect()->route('usuarios.index')->with('error', 'Erro ao deletar usuário: ' . $e->getMessage());
+        }
     }
 }
