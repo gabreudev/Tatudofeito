@@ -6,18 +6,18 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 
 
-class ServicoController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $servicos = Service::all();
+        $services = Service::all();
         // Caso vá usar paginação, utilizar a função
-        // $servicos = Service::latest()->paginate(10);
+        // $services = Service::latest()->paginate(10);
 
-        return view('servicos.index', compact('servicos'));
+        return view('services.index', compact('services'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ServicoController extends Controller
         $clientId = $request->input('client_id');
         $workerId = $request->input('worker_id');
 
-        return view('servicos.create', compact("clientId", "workerId"));
+        return view('services.create', compact("clientId", "workerId"));
     }
 
     /**
@@ -45,7 +45,7 @@ class ServicoController extends Controller
 
         $service = Service::create($validated);
 
-        return redirect()->route('servicos.index')->with('success', 'Serviço criado com sucesso!');
+        return redirect()->route('services.index')->with('success', 'Serviço criado com sucesso!');
     }
 
     /**
@@ -59,15 +59,15 @@ class ServicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $servico)
+    public function edit(Service $service)
     {
-        return view('servicos.edit', compact('servico'));
+        return view('services.edit', compact('service'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service $servico)
+    public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
             'client_id' => 'required|exists:users,id',
@@ -76,17 +76,17 @@ class ServicoController extends Controller
             'description' => 'required|string',
         ]);
 
-        $servico->update($validated);
+        $service->update($validated);
 
-        return redirect()->route('servicos.index')->with('success', 'Serviço atualizado com sucesso!');
+        return redirect()->route('services.index')->with('success', 'Serviço atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service $servico)
+    public function destroy(Service $service)
     {
-        $servico->delete();
-        return redirect()->route('servicos.index')->with('success', 'Serviço excluído com sucesso!');
+        $service->delete();
+        return redirect()->route('services.index')->with('success', 'Serviço excluído com sucesso!');
     }
 }

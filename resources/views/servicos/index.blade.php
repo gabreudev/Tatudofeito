@@ -11,7 +11,7 @@
 </div>
 @endif
 
-<a href="{{ route('servicos.create') }}">Novo Serviço</a>
+<a href="{{ route('services.create') }}">Novo Serviço</a>
 
 @if(session('success'))
 <p style="color: green;">{{ session('success') }}</p>
@@ -29,15 +29,15 @@
         </tr>
     </thead>
     <tbody>
-        @forelse ($servicos as $servico)
+        @forelse ($services as $service)
         <tr>
-            <td>{{ $servico->id }}</td>
-            <td>{{ $servico->client->name ?? 'N/A' }}</td>
-            <td>{{ $servico->worker->name ?? 'N/A' }}</td>
-            <td>{{ $servico->status }}</td>
-            <td>{{ $servico->description }}</td>
+            <td>{{ $service->id }}</td>
+            <td>{{ $service->client->name ?? 'N/A' }}</td>
+            <td>{{ $service->worker->name ?? 'N/A' }}</td>
+            <td>{{ $service->status }}</td>
+            <td>{{ $service->description }}</td>
             <td>
-                <a href="{{ route('servicos.edit', $servico->id) }}">Editar</a>
+                <a href="{{ route('services.edit', $service->id) }}">Editar</a>
             </td>
         </tr>
         @empty

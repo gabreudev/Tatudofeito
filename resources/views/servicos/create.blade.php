@@ -11,7 +11,7 @@
 </div>
 @endif
 
-<form action="{{ route('servicos.store') }}" method="POST">
+<form action="{{ route('services.store') }}" method="POST">
     @csrf
 
     <input type="hidden" name="client_id" value="{{ $clientId }}">
