@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    # TODO adicionar o campo de status no fillable
-    protected $fillable = ['client_id', 'worker_id', 'description'];
+    protected $fillable = ['client_id', 'worker_id', 'description', 'status'];
 
     public function client() {
         return $this->belongsTo(User::class, 'client_id');
