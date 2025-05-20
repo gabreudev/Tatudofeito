@@ -37,6 +37,7 @@
             <td>{{ $servico->status }}</td>
             <td>{{ $servico->description }}</td>
             <td>
+                <a href="{{ route('servicos.show', $servico->id) }}">Visualizar</a> |
                 <a href="{{ route('servicos.edit', $servico->id) }}">Editar</a>
             </td>
         </tr>
