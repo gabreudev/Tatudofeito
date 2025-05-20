@@ -21,6 +21,7 @@ class CreateUsuariosTable extends Migration {
             $table->text('description')->nullable();
             $table->boolean('is_banned')->default(false);
             $table->boolean('email_verified')->default(false);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
