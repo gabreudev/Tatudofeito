@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ServicoController, UsuarioController, ProfileController, AuthController};
+use App\Http\Controllers\{ServicoController, UsuarioController, ProfileController, AuthController, RequestController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -19,8 +19,15 @@ Route::get('/', function () {
 });
 
 
-Route::resource('servicos', ServicoController::class);
 Route::resource('usuarios', UsuarioController::class);
+Route::resource('servicos', ServicoController::class)->middleware('auth');
+
+Route::resource('requests', RequestController::class)->middleware('auth');
+Route::post('/requests/{id}/accept', [RequestController::class, 'accept'])->name('requests.accept')->middleware('auth');
+Route::post('/requests/{id}/reject', [RequestController::class, 'reject'])->name('requests.reject')->middleware('auth');
+Route::delete('/requests/{id}/delete', [RequestController::class, 'destroy'])->name('requests.destroy')->middleware('auth');
+
+
 
 //recuperar senha
 Route::post('/verificar-codigo', [AuthController::class, 'verifyCode'])->name('password.verificar-codigo');
