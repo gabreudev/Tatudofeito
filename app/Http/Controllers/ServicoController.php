@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class ServicoController extends Controller
 {
@@ -37,12 +37,10 @@ class ServicoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'client_id' => 'required|exists:users,id',
-            'worker_id' => 'required|exists:users,id',
             'status' => 'required|string',
             'description' => 'required|string',
         ]);
-
+        $validated['client_id'] = Auth::id();
         $service = Service::create($validated);
 
         return redirect()->route('servicos.index')->with('success', 'Serviço criado com sucesso!');
