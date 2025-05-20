@@ -22,4 +22,4 @@ Route::get('/', function () {
 
 Route::resource('servicos', ServicoController::class);
 Route::resource('usuarios', UsuarioController::class);
-
+Route::resource('reviews', ReviewController::class);
