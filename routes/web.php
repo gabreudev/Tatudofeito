@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\{ServicoController, UsuarioController, ProfileController, AuthController};
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,15 +29,19 @@ Route::get('/redefinir-senha', [AuthController::class, 'showResetForm'])->name('
 
 Route::post('/redefinir-senha', [AuthController::class, 'resetPassword'])->name('password.redefinir');
 
+
+
 Route::post('/enviar-codigo', [AuthController::class, 'sendResetCode'])->name('password.send-code');
 
 Route::get('/esqueci-senha', function () {
     return view('auth.esqueci-senha');
 })->name('password.request');
 
-Route::get('/verificar-codigo', function () {
-    return view('auth.verificar-codigo');
+Route::get('/verificar-codigo', function (Request $request) {
+    $email = $request->query('email');
+    return view('auth.verificar-codigo', compact('email'));
 })->name('password.code-form');
+
 //
 
 Route::get('/dashboard', function () {

@@ -39,7 +39,9 @@ public function sendResetCode(Request $request)
                 ->subject('Recuperação de senha');
     });
 
-    return redirect()->route('password.code-form')->with('status', 'Código enviado para o seu e-mail.');
+    return redirect()->route('password.code-form', ['email' => $request->email])
+    ->with('status', 'Código enviado para o seu e-mail.');
+
 }
 
 public function verifyCode(Request $request)
