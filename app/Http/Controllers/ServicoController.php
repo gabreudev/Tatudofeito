@@ -40,9 +40,10 @@ class ServicoController extends Controller
             'status' => 'required|string',
             'description' => 'required|string',
         ]);
+      
         $validated['client_id'] = Auth::id();
-        $service = Service::create($validated);
-
+        Service::create($validated);
+  
         return redirect()->route('servicos.index')->with('success', 'Serviço criado com sucesso!');
     }
 
@@ -51,7 +52,8 @@ class ServicoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $servico = Service::with(['client', 'worker'])->findOrFail($id);
+        return view('servicos.show', compact('servico'));
     }
 
     /**
@@ -68,8 +70,6 @@ class ServicoController extends Controller
     public function update(Request $request, Service $servico)
     {
         $validated = $request->validate([
-            'client_id' => 'required|exists:users,id',
-            'worker_id' => 'required|exists:users,id',
             'status' => 'required|string',
             'description' => 'required|string',
         ]);
