@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Request extends Model
 {
     use HasFactory;
-    protected $fillable = ['client_id', 'worker_id', 'status'];
+    protected $fillable = ['client_id', 'worker_id', 'service_id','status'];
 
     public function client() {
         return $this->belongsTo(User::class, 'client_id');

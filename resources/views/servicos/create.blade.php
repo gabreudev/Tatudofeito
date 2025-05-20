@@ -13,10 +13,7 @@
 
 <form action="{{ route('servicos.store') }}" method="POST">
     @csrf
-
-    <input type="hidden" name="client_id" value="{{ $clientId }}">
-    <input type="hidden" name="worker_id" value="{{ $workerId }}">
-
+    <input type="text" name="worker_id" value="{{ $workerId }}">
     <!-- TODO alterar o status da solicitação de serviço para pendente automaticamente no futuro -->
     <label for="status">Status:</label>
     <select name="status" required>
