@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ServicoController, UsuarioController, ProfileController, AuthController, RequestController};
+use App\Http\Controllers\{ServicoController, UsuarioController, ProfileController, AuthController, RequestController, ReviewController};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -18,8 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/servicos/{id}/reviews', [ReviewController::class, 'create'])->name('reviews.create');
+
+Route::resource('reviews', ReviewController::class)->except(['create']);
 
 Route::resource('usuarios', UsuarioController::class);
+
 Route::resource('servicos', ServicoController::class)->middleware('auth');
 
 Route::resource('requests', RequestController::class)->middleware('auth');
