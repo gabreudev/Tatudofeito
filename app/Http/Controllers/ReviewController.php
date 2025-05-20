@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -11,16 +12,16 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $review = Review::all(); 
-        return view('review.index', compact('review'));
+        $reviews = Review::all(); 
+        return view('reviews.index', compact('reviews'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-         return view('review.create');
+         return view('reviews.create', ['service_id' => $id]);
     }
 
     /**
@@ -37,7 +38,7 @@ class ReviewController extends Controller
 
         Review::create($validatedData);
 
-        return redirect()->back()->with('success', 'Comentário enviado com sucesso!');
+        return redirect()->route('servicos.index')->with('success', 'Comentário enviado com sucesso!');
     }
 
     /**

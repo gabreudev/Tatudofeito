@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\ServicoController;
-use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\{ServicoController, UsuarioController, ReviewController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/servicos/{id}/reviews', [ReviewController::class, 'create'])->name('reviews.create');
+
+Route::resource('reviews', ReviewController::class)->except(['create']);
 
 Route::resource('servicos', ServicoController::class);
 Route::resource('usuarios', UsuarioController::class);
-Route::resource('reviews', ReviewController::class);

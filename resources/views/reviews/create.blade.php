@@ -14,10 +14,10 @@
 <form action="{{ route('reviews.store') }}" method="POST">
     @csrf
 
-    <input type="hidden" name="service_id" value="{{ $serviceId }}">
+    <input type="hidden" name="service_id" value="{{ $service_id }}">
 
     <label for="rating">Nota (1 a 5):</label>
-    <select name="rating" required>
+    <select name="stars" required>
         <option value="">Selecione uma nota</option>
         @for ($i = 1; $i <= 5; $i++)
             <option value="{{ $i }}">{{ $i }} estrela{{ $i > 1 ? 's' : '' }}</option>
