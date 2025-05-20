@@ -10,6 +10,7 @@ class CreateSolicitacoesTable extends Migration {
             $table->id();
             $table->foreignId('client_id')->constrained('users');
             $table->foreignId('worker_id')->constrained('users');
+            $table->foreignId('service_id')->constrained('services');
             $table->string('status');
             $table->timestamps();
         });

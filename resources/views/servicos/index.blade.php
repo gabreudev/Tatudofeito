@@ -39,6 +39,14 @@
             <td>
                 <a href="{{ route('servicos.show', $servico->id) }}">Visualizar</a> |
                 <a href="{{ route('servicos.edit', $servico->id) }}">Editar</a>
+                <form action="{{ route('requests.store') }}" method="POST" style="margin-top: 5px;">
+                    @csrf
+                    <input type="number" name="worker_id" placeholder="ID do prestador" required>
+                    <input type="hidden" name="status" value="pendente">
+                    <input type="hidden" name="service_id" value="{{ $servico->id }}">
+
+                    <button type="submit">Solicitar Serviço</button>
+                </form>
             </td>
         </tr>
         @empty
