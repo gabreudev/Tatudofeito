@@ -37,11 +37,11 @@ class ServicoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'status' => 'required|string',
             'description' => 'required|string',
         ]);
       
         $validated['client_id'] = Auth::id();
+        $validated['status'] = 'pendente';
         Service::create($validated);
   
         return redirect()->route('servicos.index')->with('success', 'Serviço criado com sucesso!');

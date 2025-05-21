@@ -1,3 +1,5 @@
+@include('components.alerta-erros')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -10,7 +12,7 @@
                         <label class="col-sm-3 fw-bold">Nome:</label>
                         <div class="col-sm-9">{{ $user->name }}</div>
                     </div>
-                    
+
                     <div class="row mb-3">
                         <label class="col-sm-3 fw-bold">E-mail:</label>
                         <div class="col-sm-9">{{ $user->email }}</div>

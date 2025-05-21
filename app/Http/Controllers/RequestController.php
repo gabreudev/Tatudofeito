@@ -41,12 +41,12 @@ class RequestController extends Controller
             'service_id' => 'required|exists:services,id',
         ]);
     
-        $existing = ServiceRequest::where('client_id', Auth::id())
+        $existing_pending = ServiceRequest::where('client_id', Auth::id())
             ->where('worker_id', $request->worker_id)
             ->where('status', 'pendente')
             ->first();
-    
-        if ($existing) {
+
+        if ($existing_pending) {
             return back()->withErrors(['Já existe uma solicitação pendente para este profissional.']);
         }
     
@@ -91,15 +91,26 @@ class RequestController extends Controller
     if (auth()->id() !== $solicitacao->worker_id) {
         abort(403);
     }
+
+    // Verificar se o serviço ainda está pendente
+    $servico = Service::findOrFail($solicitacao->service_id);
+    if ($servico->status !== 'pendente') {
+        return back()->withErrors(['O serviço já foi aceito por outro profissional']);
+    }
     
     $solicitacao->status = 'aceita';
-    $servico = Service::findOrFail($solicitacao->service_id);
+    $solicitacao->save();
+
     $servico->status = 'em andamento';
     $servico->worker_id = $solicitacao->worker_id;
     $servico->save();
     
-    $solicitacao->save();
-    
+    // Rejeita automaticamente as outras solicitações pendentes do mesmo serviço
+    ServiceRequest::where('service_id', $servico->id)
+        ->where('id', '!=', $solicitacao->id)
+        ->where('status', 'pendente')
+        ->update(['status' => 'expirada']);
+
     return redirect()->route('requests.index')->with('success', 'Solicitação aceita com sucesso.');
 }
 
