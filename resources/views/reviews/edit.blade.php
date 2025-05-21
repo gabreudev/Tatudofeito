@@ -1,15 +1,6 @@
 <h1>Editar Avaliação</h1>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Erros encontrados:</strong>
-        <ul>
-            @foreach ($errors->all() as $erro)
-                <li>{{ $erro }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('components.alerta-erros')
 
 <form action="{{ route('reviews.update', $review->id) }}" method="POST" class="review-form">
     @csrf
