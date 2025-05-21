@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Review;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -38,7 +39,7 @@ class ReviewController extends Controller
 
         Review::create($validatedData);
 
-        return redirect()->route('servicos.index')->with('success', 'Comentário enviado com sucesso!');
+        return redirect()->route('reviews.index')->with('success', 'Comentário enviado com sucesso!');
     }
 
     /**
@@ -54,8 +55,21 @@ class ReviewController extends Controller
      */
     public function edit(string $id)
     {
-        $usuario = User::find0rFail($id);
-        return view('usuarios.dit', compact('usuario'));
+        $review = Review::findOrFail($id);
+        $user = Auth::user();
+
+        $service = $review->service;
+
+        // Permite que apenas o cliente que criou a avaliação e o admin editem o comentário
+        if ($user->role !== 'admin' && $service->client_id !== $user->id) {
+            return redirect()->route('reviews.index')->with('error', 'Você não tem permissão para editar esta avaliação.');
+        }
+        //Array para ser usado em views que esperam uma lista de serviços.
+        //Útil quando se usa a mesma view para criar e editar avaliações.
+        // $services = [$service]; 
+        // return view('reviews.edit', compact('review', 'services));
+
+        return view('reviews.edit', compact('review'));
     }
 
     /**
@@ -63,7 +77,27 @@ class ReviewController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
+        $review = Review::findOrFail($id);
+        $user = Auth::user();
+
+        // Veirfica Permissões
+        $service = $review->service;
+        if ($user->role !== 'admin' && $service->client_id !== $user->id) {
+            return redirect()->route('servicos.index')->with('error', 'Você não tem permissão para atualizar esta avaliação.');
+        }
+
+        $validatedData = $request->validate([
+            'comment' => 'required|string|max:1500',
+            'url_image' => 'nullable|url|max:255',
+            'stars' => 'required|integer|min:1|max:5',
+        ]);
+
+        $review->update($validatedData);
+
+        // Teoricamente Atualiza a avaliação media do trablahador - Maas, não está implementado corretamente, ainda.
+        //$this->updateWorkerRating($service->worker_id);
+
+        return redirect()->route('reviews.index')->with('sucess', 'Avaliação atualizada com sucesso!');
     }
 
     /**
