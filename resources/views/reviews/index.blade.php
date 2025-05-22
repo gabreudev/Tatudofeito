@@ -1,11 +1,14 @@
 <div class="container">
     <h1>Lista de Comentários</h1>
+
+    @include('components.alerta-erros')
+
     @if (session('success'))
     <div class="alert alert-success" style="color: green; margin-bottom: 10px;">
         {{ session('success') }}
     </div>
     @endif
-    
+
     @if ($reviews->isEmpty())
     <p>Nenhum comentário encontrado.</p>
     @else
@@ -25,19 +28,19 @@
                 <td>{{ $review->id }}</td>
                 <td>
                     @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <= $review->stars)
-                            <span class="star filled">★</span>
+                        @if ($i <=$review->stars)
+                        <span class="star filled">★</span>
                         @else
-                            <span class="star empty">☆</span>
+                        <span class="star empty">☆</span>
                         @endif
-                    @endfor
+                        @endfor
                 </td>
                 <td>{{ $review->comment }}</td>
                 <td>
                     @if ($review->url_image)
-                        <img src="{{ $review->url_image }}" alt="Imagem do comentário" width="100">
+                    <img src="{{ $review->url_image }}" alt="Imagem do comentário" width="100">
                     @else
-                        Sem imagem
+                    Sem imagem
                     @endif
                 </td>
                 <td>{{ $review->created_at->format('d/m/Y H:i') }}</td>
@@ -50,10 +53,10 @@
 
 <style>
     .star.filled {
-    color: gold;
-}
+        color: gold;
+    }
 
-.star.empty {
-    color: #ccc;
-}
+    .star.empty {
+        color: #ccc;
+    }
 </style>

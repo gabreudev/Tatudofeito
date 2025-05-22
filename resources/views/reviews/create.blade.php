@@ -1,15 +1,6 @@
 <h1>Deixe um comentário sobre o serviço</h1>
 
-@if ($errors->any())
-    <div>
-        <strong>Erros encontrados:</strong>
-        <ul>
-            @foreach ($errors->all() as $erro)
-                <li>{{ $erro }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('components.alerta-erros')
 
 <form action="{{ route('reviews.store') }}" method="POST">
     @csrf
@@ -21,7 +12,7 @@
         <option value="">Selecione uma nota</option>
         @for ($i = 1; $i <= 5; $i++)
             <option value="{{ $i }}">{{ $i }} estrela{{ $i > 1 ? 's' : '' }}</option>
-        @endfor
+            @endfor
     </select>
 
     <label for="comment">Comentário:</label>

@@ -1,15 +1,6 @@
 <h1>Cadastrar Usuário</h1>
 
-@if ($errors->any())
-    <div>
-        <strong>Erros encontrados:</strong>
-        <ul>
-            @foreach ($errors->all() as $erro)
-                <li>{{ $erro }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@include('components.alerta-erros')
 
 <form action="{{ route('usuarios.store') }}" method="POST">
     @csrf
@@ -55,7 +46,7 @@
     <label>Descrição:</label>
     <textarea name="description"></textarea><br>
 
-    
+
     <button type="submit">Cadastrar</button>
 
 </form>

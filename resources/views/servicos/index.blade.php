@@ -1,15 +1,6 @@
 <h1>Lista de Serviços</h1>
 
-@if ($errors->any())
-<div>
-    <strong>Erros encontrados:</strong>
-    <ul>
-        @foreach ($errors->all() as $erro)
-        <li>{{ $erro }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@include('components.alerta-erros')
 
 <a href="{{ route('servicos.create') }}">Novo Serviço</a>
 
@@ -39,6 +30,8 @@
             <td>
                 <a href="{{ route('servicos.show', $servico->id) }}">Visualizar</a> |
                 <a href="{{ route('servicos.edit', $servico->id) }}">Editar</a>
+
+                @if($servico->status !== 'em andamento')
                 <form action="{{ route('requests.store') }}" method="POST" style="margin-top: 5px;">
                     @csrf
                     <input type="number" name="worker_id" placeholder="ID do prestador" required>
@@ -47,6 +40,7 @@
 
                     <button type="submit">Solicitar Serviço</button>
                 </form>
+                @endif
             </td>
         </tr>
         @empty

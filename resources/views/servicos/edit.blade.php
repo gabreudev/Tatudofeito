@@ -1,15 +1,6 @@
 <h1>Alterar Serviço</h1>
 
-@if ($errors->any())
-<div>
-    <strong>Erros encontrados:</strong>
-    <ul>
-        @foreach ($errors->all() as $erro)
-        <li>{{ $erro }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@include('components.alerta-erros')
 
 <a href="{{ url()->previous() }}" style="display: inline-block; margin-bottom: 15px; color: blue; text-decoration: underline;">&larr; Voltar</a>
 

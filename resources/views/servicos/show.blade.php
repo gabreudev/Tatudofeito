@@ -1,15 +1,6 @@
 <h1>Detalhes do Serviço #{{ $servico->id }}</h1>
 
-@if ($errors->any())
-<div>
-    <strong>Erros encontrados:</strong>
-    <ul>
-        @foreach ($errors->all() as $erro)
-        <li>{{ $erro }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@include('components.alerta-erros')
 
 <p><strong>Cliente:</strong> {{ $servico->client->name ?? 'N/A' }}</p>
 <p><strong>Prestador:</strong> {{ $servico->worker->name ?? 'N/A' }}</p>
