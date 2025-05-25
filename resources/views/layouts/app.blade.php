@@ -13,13 +13,14 @@
 
 <body>
     @include('components.alerta-erros')
-    <div class="container">
-        @include('components.header')
 
+    @include('components.header')
+
+    <main>
         @yield('content')
+    </main>
 
-        @include('components.footer')
-    </div>
+    @include('components.footer')
 
     @stack('scripts')
 

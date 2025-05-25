@@ -7,16 +7,18 @@
 body {
     margin: 0;
     background: #E8E7E7;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
 .container {
     width: 100%;
-    /* min-height: 100vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    padding-bottom: 110px;
 }
 
 .form-wrapper {
@@ -46,7 +48,8 @@ body {
     z-index: -1;
 }
 
-.form-wrapper h1, .form-wrapper h2 {
+.form-wrapper h1,
+.form-wrapper h2 {
     margin: 0;
     color: rgba(28, 70, 51, 0.80);
     font-size: 40px;
@@ -156,6 +159,45 @@ body {
     color: #B2822B;
 }
 
+.checkbox-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin: 20px 0 30px 0;
+    padding: 0 40px;
+    gap: 100px;
+}
+
+.checkbox-option {
+    display: flex;
+    flex-direction: row;
+    /* Força layout horizontal */
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-option input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.radio-label {
+    color: #1C4633;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0;
+    user-select: none;
+    display: inline-block;
+    /* Garante que o label fique na mesma linha */
+}
+
+.checkbox-option input[type="radio"]:checked {
+    accent-color: #1C4633;
+}
+
 @keyframes slideUp {
     to {
         transform: translateY(0);
@@ -167,6 +209,7 @@ body {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -178,7 +221,8 @@ body {
         margin: 20px;
     }
 
-    .form-wrapper h1, .form-wrapper h2 {
+    .form-wrapper h1,
+    .form-wrapper h2 {
         font-size: 30px;
     }
 
@@ -189,4 +233,22 @@ body {
     .login-button {
         font-size: 20px;
     }
+}
+
+.form-field textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid rgba(28, 70, 51, 0.80);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    resize: vertical; /* permite redimensionar se quiser */
+}
+
+.form-field textarea:focus {
+    outline: none;
+    border-color: #B2822B;
+    box-shadow: 0 0 0 3px rgba(178, 130, 43, 0.2);
 }
