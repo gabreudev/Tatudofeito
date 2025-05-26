@@ -21,35 +21,20 @@
 
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-                <div class="form-field">
-                    <input type="text" id="name" name="name" placeholder="Nome" value="{{ old('name') }}"
-                        required autofocus>
-                </div>
+                <x-input-field name="name" placeholder="Nome" required autofocus />
 
-                <div class="form-field">
-                    <input type="text" id="cpf" name="cpf" placeholder="CPF" value="{{ old('cpf') }}"
-                        required>
-                </div>
+                <x-input-field name="cpf" placeholder="CPF" required />
 
-                <div class="form-field">
-                    <input type="tel" pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" id="phone" name="phone"
-                        placeholder="(12) 34567-8910" value="{{ old('phone') }}" required>
-                </div>
+                <x-input-field name="cpf" placeholder="CPF" required />
 
-                <div class="form-field">
-                    <input type="email" id="email" name="email" placeholder="Email" value="{{ old('email') }}"
-                        required>
-                </div>
+                <x-input-field type="tel" name="phone" placeholder="(12) 34567-8910"
+                    pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" required />
 
-                <div class="form-field">
-                    <input type="password" id="password" name="password" placeholder="Senha" required>
-                </div>
+                <x-input-field type="email" name="email" placeholder="Email" required />
 
-                <div class="form-field">
-                    <input type="password" id="password_confirmation" name="password_confirmation"
-                        placeholder="Confirmar senha" required>
-                </div>
+                <x-input-field type="password" name="password" placeholder="Senha" required />
 
+                <x-input-field type="password" name="password_confirmation" placeholder="Confirmar senha" required />
 
                 <div class="form-field checkbox-group flex justify-center gap-6">
                     <div class="checkbox-option">
@@ -67,24 +52,14 @@
 
                 {{-- Campos exclusivos para Prestador --}}
                 <div id="worker-fields" class="{{ old('role') === 'worker' ? '' : 'hidden' }}">
-                    <div class="form-field">
-                        <input type="text" id="specialties" name="specialties" placeholder="Especialidades"
-                            value="{{ old('specialties') }}">
-                    </div>
+                    <x-input-field name="specialties" placeholder="Especialidades" required />
 
-                    <div class="form-field">
-                        <input type="text" id="payment_methods" name="payment_methods" placeholder="Formas de pagamento"
-                            value="{{ old('payment_methods') }}">
-                    </div>
+                    <x-input-field name="payment_methods" placeholder="Formas de pagamento" required />
 
-                    <div class="form-field">
-                        <input type="number" step="0.01" min="0" id="daily_value" name="daily_value"
-                            placeholder="Valor diário (R$)" value="{{ old('daily_value') }}">
-                    </div>
+                    <x-input-field type="number" name="daily_value" placeholder="Valor diário (R$)" step="0.01"
+                        min="0" required />
 
-                    <div class="form-field">
-                        <textarea id="description" name="description" placeholder="Descrição">{{ old('description') }}</textarea>
-                    </div>
+                    <x-input-field type="textarea" name="description" placeholder="Descrição" required />
                 </div>
 
                 <button type="submit" class="login-button">Cadastrar</button>

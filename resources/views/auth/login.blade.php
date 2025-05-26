@@ -21,14 +21,9 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <div class="form-field">
-                    <input type="email" id="email" name="email" placeholder="Usuário" value="{{ old('email') }}"
-                        required autofocus>
-                </div>
+                <x-input-field type="email" name="email" placeholder="Email" required autofocus />
 
-                <div class="form-field">
-                    <input type="password" id="password" name="password" placeholder="Senha" required>
-                </div>
+                <x-input-field type="password" name="password" placeholder="Senha" required />
 
                 <div class="forgot-password">
                     @if (Route::has('password.request'))
