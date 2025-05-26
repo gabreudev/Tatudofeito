@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('css')
-    @vite(['resources/css/login.css'])
+    @vite(['resources/css/forms.css'])
 @endsection
 
 @section('content')

@@ -3,7 +3,7 @@
 @section('title', 'Registro')
 
 @section('css')
-    @vite(['resources/css/register.css'])
+    @vite(['resources/css/forms.css', 'resources/css/register.css'])
 @endsection
 
 @section('content')
