@@ -25,8 +25,6 @@
 
                 <x-input-field name="cpf" placeholder="CPF" required />
 
-                <x-input-field name="cpf" placeholder="CPF" required />
-
                 <x-input-field type="tel" name="phone" placeholder="(12) 34567-8910"
                     pattern="\(\d{2}\)\s?\d{4,5}-\d{4}" required />
 
@@ -52,14 +50,14 @@
 
                 {{-- Campos exclusivos para Prestador --}}
                 <div id="worker-fields" class="{{ old('role') === 'worker' ? '' : 'hidden' }}">
-                    <x-input-field name="specialties" placeholder="Especialidades" required />
+                    <x-input-field name="specialties" placeholder="Especialidades" />
 
-                    <x-input-field name="payment_methods" placeholder="Formas de pagamento" required />
+                    <x-input-field name="payment_methods" placeholder="Formas de pagamento" />
 
                     <x-input-field type="number" name="daily_value" placeholder="Valor diário (R$)" step="0.01"
-                        min="0" required />
+                        min="0" />
 
-                    <x-input-field type="textarea" name="description" placeholder="Descrição" required />
+                    <x-input-field type="textarea" name="description" placeholder="Descrição" />
                 </div>
 
                 <button type="submit" class="login-button">Cadastrar</button>
