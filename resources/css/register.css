@@ -1,0 +1,22 @@
+.container {
+    padding-bottom: 110px;
+}
+
+.form-field textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid rgba(28, 70, 51, 0.80);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    resize: vertical;
+    /* permite redimensionar se quiser */
+}
+
+.form-field textarea:focus {
+    outline: none;
+    border-color: #B2822B;
+    box-shadow: 0 0 0 3px rgba(178, 130, 43, 0.2);
+}

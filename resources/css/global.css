@@ -1,0 +1,175 @@
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #E8E7E7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: #D9D9D9;
+    padding: 14px 37px;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.header .menu-container {
+    display: flex;
+    margin-left: auto;
+}
+
+.header-button {
+    height: 51px;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(28, 70, 51, 0.80);
+    border-radius: 30px;
+    color: #EFEFEF;
+    font-size: 25px;
+    font-weight: 275;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    border: none;
+    text-decoration: none;
+}
+
+.header-button:hover,
+.header-button:focus {
+    background: rgba(28, 70, 51, 0.90);
+    color: #fff;
+    outline: none;
+}
+
+/* Esconder "Sobre Nós" em telas menores */
+@media (max-width: 768px) {
+    .header-button.sobre-nos {
+        display: none;
+    }
+
+    .header-button {
+        height: 45px;
+        font-size: 20px;
+        padding: 0 15px;
+        margin: 0 8px;
+    }
+}
+
+/* Esconder também em telas muito pequenas (mobile) */
+@media (max-width: 480px) {
+    .header-button {
+        height: 40px;
+        font-size: 18px;
+        padding: 0 10px;
+        margin: 0 5px;
+    }
+}
+
+/* Modificações no Footer */
+.footer-container {
+    width: 100%;
+    background: #D9D9D9;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-content {
+    width: 100%;
+    height: 87px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    max-width: 1728px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.contact-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.icon-container {
+    width: 30px;
+    height: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.email-icon {
+    width: 21px;
+    height: 17px;
+    fill: #426354;
+}
+
+.phone-icon {
+    width: 13px;
+    height: 21px;
+    fill: black;
+    stroke: #426354
+}
+
+.contact-text {
+    color: #426354;
+    font-size: 15px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+/* Para garantir que o conteúdo principal não fique escondido sob o header e footer */
+main {
+    margin-top: 80px;
+    /* Altura do header */
+    margin-bottom: 87px;
+    /* Altura do footer */
+    flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .contact-text {
+        font-size: 14px;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
