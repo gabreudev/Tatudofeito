@@ -22,7 +22,7 @@ class ReviewController extends Controller
      */
     public function create(string $id)
     {
-         return view('reviews.create', ['service_id' => $id]);
+        return view('reviews.create', ['service_id' => $id]);
     }
 
     /**
@@ -47,7 +47,9 @@ class ReviewController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $review = Review::findOrFail($id);
+
+        return view('reviews.show', compact('review'));
     }
 
     /**
@@ -105,6 +107,17 @@ class ReviewController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $review = Review::findOrFail($id);
+        $user = Auth::user();
+
+        // Verifica Permissões
+        $service = $review->service;
+        if ($user->role !== 'admin' && $service->client_id !== $user->id) {
+            return redirect()->route('reviews.index')->with('error', 'Você não tem permissão para excluir esta avaliação.');
+        }
+
+        $review->delete();
+
+        return redirect()->route('reviews.index')->with('success', 'Avaliação excluída com sucesso!');
     }
 }
