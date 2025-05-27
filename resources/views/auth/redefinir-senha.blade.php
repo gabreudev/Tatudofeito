@@ -3,48 +3,20 @@
 @section('title', 'Verificação de Código')
 
 @section('css')
-    @vite(['resources/css/forms.css', 'resources/css/style3.css'])
+    @vite(['resources/css/forms.css'])
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="card">
-            <div class="content">
-                <div class="titulo">
-                    <h1>Digite uma nova senha</h1>
-                </div>
+    <x-auth-container title="Digite uma nova senha" routeName="password.redefinir">
+        <input type="hidden" name="email" value="{{ $email }}">
+        <input type="hidden" name="code" value="{{ $code }}">
 
-                <div class="image-container">
-                    <img src="../../images/Tatu.svg" alt="Descrição da imagem" width="300" height="125">
-                </div>
+        <x-input-field type="password" name="password" placeholder="Nova senha" required />
 
-                {{-- Exibe status de sessão --}}
-                @if (session('status'))
-                    <div class="session-status">{{ session('status') }}</div>
-                @endif
+        <x-input-field type="password" name="password_confirmation" placeholder="Confirmar senha" required />
 
-                <form method="POST" action="{{ route('password.redefinir') }}">
-                    @csrf
-
-                    <div class="form-section">
-                        <input type="hidden" name="email" value="{{ $email }}">
-                        <input type="hidden" name="code" value="{{ $code }}">
-
-                        <div class="password-fields">
-                            <x-input-field type="password" name="password" placeholder="Nova senha" required />
-
-                            <x-input-field type="password" name="password_confirmation" placeholder="Confirmar senha"
-                                required />
-                        </div>
-
-                        <div class="buttons">
-                            <a href="{{ route('login') }}">
-                                <button type="submit" class="btn-back">Salvar nova senha</button>
-                            </a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        <a href="{{ route('login') }}">
+            <button type="submit" class="default-button">Salvar nova senha</button>
+        </a>
+    </x-auth-container>
 @endsection
