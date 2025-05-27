@@ -1,18 +1,22 @@
-@include('components.alerta-erros')
+@extends('layouts.app')
 
-@if (session('status'))
-    <div style="color: green;">
-        {{ session('status') }}
-    </div>
-@endif
+@section('title', 'Verificação de Código')
 
+@section('css')
+    @vite(['resources/css/forms.css'])
+@endsection
 
-<form action="{{ route('password.redefinir') }}" method="POST">
-    @csrf
-    <input type="hidden" name="email" value="{{ $email }}">
-    <input type="hidden" name="code" value="{{ $code }}">
+@section('content')
+    <x-auth-container title="Digite uma nova senha" routeName="password.redefinir">
+        <input type="hidden" name="email" value="{{ $email }}">
+        <input type="hidden" name="code" value="{{ $code }}">
 
-    <input type="password" name="password" placeholder="Nova senha">
-    <input type="password" name="password_confirmation" placeholder="Confirme a nova senha">
-    <button type="submit">Salvar nova senha</button>
-</form>
+        <x-input-field type="password" name="password" placeholder="Nova senha" required />
+
+        <x-input-field type="password" name="password_confirmation" placeholder="Confirmar senha" required />
+
+        <a href="{{ route('login') }}">
+            <button type="submit" class="default-button">Salvar nova senha</button>
+        </a>
+    </x-auth-container>
+@endsection

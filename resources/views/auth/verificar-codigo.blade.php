@@ -1,15 +1,22 @@
-@include('components.alerta-erros')
+@extends('layouts.app')
 
-@if (session('status'))
-    <div style="color: green;">
-        {{ session('status') }}
-    </div>
-@endif
+@section('title', 'Verificação de Código')
+
+@section('css')
+    @vite(['resources/css/forms.css'])
+@endsection
+
+@section('content')
+    <x-auth-container title="Digite o código que você" subtitle="recebeu no seu E-mail" routeName="password.verificar-codigo"
+        submitLabel="Verificar código">
+        <x-input-field type="hidden" name="email" :value="$email" />
+        <x-input-field name="code" placeholder="Digite o código" required />
 
 
-<form action="{{ route('password.verificar-codigo') }}" method="POST">
-    @csrf
-    <input type="hidden" name="email" value="{{ $email }}">
-    <input type="text" name="code" required placeholder="Digite o código">
-    <button type="submit">Verificar código</button>
-</form>
+        <x-slot name="afterButton">
+            <a href="{{ route('password.request') }}">
+                <x-default-button type="button">Voltar</x-default-button>
+            </a>
+        </x-slot>
+    </x-auth-container>
+@endsection

@@ -1,6 +1,6 @@
 <div class="header">
-    <a href="{{ url('/home') }}" class="home-container">
-        <img src="{{ asset('images/Tatu.svg') }}" alt="Descrição da imagem" width="145" height="100">
+    <a href="{{ url('/') }}" class="home-container">
+        <x-logo width="145" height="100" />
     </a>
     <div class="menu-container">
         <a href="{{ url('/about') }}" class="header-button sobre-nos">Sobre nós</a>
