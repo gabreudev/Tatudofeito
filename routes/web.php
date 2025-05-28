@@ -18,6 +18,17 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+Route::get('/about', function () {
+    return view('pages.about');
+});
+
+Route::get('/services', function () {
+    return view('pages.services');
+});
+
+
+Route::get('/usuarios/available', [\App\Http\Controllers\UsuarioController::class, 'available'])->name('usuarios.available');
+
 Route::get('/servicos/{id}/reviews', [ReviewController::class, 'create'])->name('reviews.create');
 
 Route::resource('reviews', ReviewController::class)->except(['create']);

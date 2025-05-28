@@ -179,4 +179,14 @@ class UsuarioController extends Controller
             return redirect()->route('usuarios.index')->with('error', 'Erro ao deletar usuário: ' . $e->getMessage());
         }
     }
+
+    public function available()
+    {
+        $usuarios = \App\Models\User::all(); // SELECT * FROM users
+        
+        
+        return view('pages.available', compact('usuarios'));
+
+    }
+
 }
