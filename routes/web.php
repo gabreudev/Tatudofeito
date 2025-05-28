@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
 
 Route::get('/servicos/{id}/reviews', [ReviewController::class, 'create'])->name('reviews.create');
