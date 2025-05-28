@@ -11,14 +11,14 @@
         <div class="carousel-container">
             <div class="carousel" id="carousel">
                 <div class="carousel-item">
-                    <img src="{{asset(images/Home.svg)}}" alt="Serviços Domésticos">
+                    <img src="{{ asset('images/Home.svg') }}" alt="Serviços Domésticos">
                 </div>
                 <div class="carousel-item">
-                    <img src="{{asset(images/Home2.svg)}}" alt="Reformas e Construção">
+                    <img src="{{ asset('images/Home2.svg') }}" alt="Reformas e Construção">
 
                 </div>
                 <div class="carousel-item">
-                    <img src="{{asset(images/Home3.svg)}}" alt="Tecnologia e Informática">
+                    <img src="{{ asset('images/Home3.svg') }}" alt="Tecnologia e Informática">
                 </div>
             </div>
 
