@@ -6,6 +6,7 @@
     @vite(['resources/css/services.css'])
 @endsection
 
+@section('content')
     <div class="container">
 
         <div class="section-title">
@@ -18,29 +19,26 @@
                 <div class="service-label">Culinária</div>
             </a>
             <a href="{{ route('usuarios.available') }}" class="service-item">
-                <img src="{{asset('images/image2.png')}}" alt="Reparos">
+                <img src="{{ asset('images/image2.png') }}" alt="Reparos">
                 <div class="service-label">Reparos</div>
             </a>
             <a href="{{ route('usuarios.available') }}" class="service-item">
-                <img src="{{asset('images/image3.png')}}" alt="Pintura">
+                <img src="{{ asset('images/image3.png') }}" alt="Pintura">
                 <div class="service-label">Pintura</div>
             </a>
             <a href="{{ route('usuarios.available') }}" class="service-item">
-                <img src="{{asset('images/image4.png')}}" alt="Limpeza">
+                <img src="{{ asset('images/image4.png') }}" alt="Limpeza">
                 <div class="service-label">Limpeza</div>
             </a>
             <a href="{{ route('usuarios.available') }}" class="service-item">
-                <img src="{{asset('images/image5.png')}}" alt="Mudanças">
+                <img src="{{ asset('images/image5.png') }}" alt="Mudanças">
                 <div class="service-label">Mudanças</div>
             </a>
             <a href="{{ route('usuarios.available') }}" class="service-item">
-                <img src="{{asset('images/image6.png')}}" alt="Limpeza de Piscina">
+                <img src="{{ asset('images/image6.png') }}" alt="Limpeza de Piscina">
                 <div class="service-label">Piscina</div>
             </a>
         </div>
 
     </div>
-
-@section('content')
-
 @endsection

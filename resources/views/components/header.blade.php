@@ -4,7 +4,7 @@
     </a>
     <div class="menu-container">
         <a href="{{ url('/about') }}" class="header-button sobre-nos">Sobre nós</a>
-        <a href="{{ url('/servicos') }}" class="header-button">Serviços</a>
+        <a href="{{ url('/services') }}" class="header-button">Serviços</a>
 
         @guest
             <a href="{{ url('/login') }}" class="header-button">Login</a>
