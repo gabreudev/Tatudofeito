@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Container do carrossel */
+.carousel-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Importante para esconder slides fora da view */
+    position: relative;
+}
+
+/* Carrossel */
+.carousel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+/* Items do carrossel */
+.carousel-item {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Removido padding para imagem ocupar todo espaço */
+}
+
+/* Imagens do carrossel */
+.carousel-item img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover; /* Mantém proporção da imagem */
+    margin: 0; /* Removido margin bottom */
+}
+
+/* Controles do carrossel */
+.carousel-controls {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 2;
+}
+
+.carousel-controls button {
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.carousel-controls button:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.carousel-item h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.carousel-item p {
+    color: #666;
+    max-width: 600px;
+    margin-bottom: 15px;
+}
+
+.carousel-item .btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.carousel-item .btn:hover {
+    background-color: #45a049;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-controls button {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.carousel-controls button:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
