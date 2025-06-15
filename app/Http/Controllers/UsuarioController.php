@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enums\ServicoEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Log;
 
 class UsuarioController extends Controller
 {
@@ -13,8 +16,14 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all(); 
+        $usuarios = User::all();
         return view('usuarios.index', compact('usuarios'));
+
+        /**
+         *@php                                                                                               @foreach($categories as $category)
+         *$categories = json_decode($user->categories);  usa isso na view pra renderizar as categorias           <li>{{ $category }}</li>
+         *@endphp                                                                                            @endforeach
+         */
     }
 
     /**
@@ -38,6 +47,7 @@ class UsuarioController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'role' => 'required|in:client,worker,admin',
             'specialties' => 'nullable|string',
+            'categories' => 'array',
             'average_rating' => 'nullable|numeric|min:0|max:5',
             'payment_methods' => 'nullable|string',
             'daily_value' => 'nullable|numeric|min:0',
@@ -53,6 +63,7 @@ class UsuarioController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'],
+            'categories' => $validated['categories'] ?? [],
             'specialties' => $validated['specialties'] ?? null,
             'average_rating' => $validated['average_rating'] ?? null,
             'payment_methods' => $validated['payment_methods'] ?? null,
@@ -62,7 +73,7 @@ class UsuarioController extends Controller
             'email_verified' => $validated['email_verified'] ?? false,
         ]);
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuário cadastrado com sucesso!');
+        return redirect()->route('login')->with('success', 'Usuário cadastrado com sucesso!');
     }
 
     /**
@@ -78,7 +89,6 @@ class UsuarioController extends Controller
             // $this->authorize('view', User::class);
             $user = User::findOrFail($id);
             return view('usuarios.show', compact('user'));
-            
         } catch (\Exception $e) {
             return redirect()->route('usuarios.index')->with('error', 'Erro ao exibir usuário: ' . $e->getMessage());
         }
@@ -108,7 +118,7 @@ class UsuarioController extends Controller
             'password' => 'nullable|string|min:6|confirmed',
             'role' => 'required|in:client,worker,admin',
         ];
-        
+
         // Adicionar regras para campos específicos de prestador se o role for worker
         if ($request->input('role') === 'worker') {
             $rules['specialties'] = 'nullable|string';
@@ -116,10 +126,10 @@ class UsuarioController extends Controller
             $rules['daily_value'] = 'nullable|numeric|min:0';
             $rules['description'] = 'nullable|string';
         }
-        
+
         // Validar os dados
         $validated = $request->validate($rules);
-        
+
         // Preparar dados para atualização
         $userData = [
             'name' => $validated['name'],
@@ -128,9 +138,10 @@ class UsuarioController extends Controller
             'email' => $validated['email'],
             'role' => $validated['role'],
         ];
-        
+
         // Adicionar campos de prestador apenas se o papel for worker
         if ($validated['role'] === 'worker') {
+            $userData['categories'] = $request->categories ?? [];
             $userData['specialties'] = $validated['specialties'] ?? null;
             $userData['payment_methods'] = $validated['payment_methods'] ?? null;
             $userData['daily_value'] = $validated['daily_value'] ?? null;
@@ -139,18 +150,19 @@ class UsuarioController extends Controller
             $userData['average_rating'] = $usuario->average_rating;
         } else {
             // Limpar campos de prestador se o usuário não for mais um worker
+            $userData['categories'] = [];
             $userData['specialties'] = null;
             $userData['payment_methods'] = null;
             $userData['daily_value'] = null;
             $userData['description'] = null;
             $userData['average_rating'] = null;
         }
-        
+
         // Atualiza a senha somente se for enviada
         if (!empty($validated['password'])) {
             $userData['password'] = Hash::make($validated['password']);
         }
-        
+
         try {
             $usuario->update($userData);
             return redirect()->route('usuarios.index')
@@ -168,25 +180,23 @@ class UsuarioController extends Controller
      */
     public function destroy(User $usuario)
     {
-        try {    
+        try {
             // Deletar o usuário
             $usuario->delete();
-    
+
             // Redirecionar com mensagem de sucesso
             return redirect()->route('usuarios.index')->with('success', 'Usuário deletado com sucesso!');
-
         } catch (\Exception $e) {
             return redirect()->route('usuarios.index')->with('error', 'Erro ao deletar usuário: ' . $e->getMessage());
         }
     }
 
-    public function available()
+    public function available(Request $request)
     {
-        $usuarios = \App\Models\User::all(); // SELECT * FROM users
-        
-        
+        $category = $request->get('category');
+
+        $usuarios = User::whereJsonContains('categories', $category)->get(); // SELECT * FROM users
+
         return view('pages.available', compact('usuarios'));
-
     }
-
 }

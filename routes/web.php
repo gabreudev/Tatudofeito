@@ -27,7 +27,7 @@ Route::get('/services', function () {
 });
 
 
-Route::get('/usuarios/available', [\App\Http\Controllers\UsuarioController::class, 'available'])->name('usuarios.available');
+Route::get('/usuarios/available', [UsuarioController::class, 'available'])->name('usuarios.available');
 
 Route::get('/servicos/{id}/reviews', [ReviewController::class, 'create'])->name('reviews.create');
 

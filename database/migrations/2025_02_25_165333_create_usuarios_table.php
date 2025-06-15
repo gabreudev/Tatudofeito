@@ -15,6 +15,7 @@ class CreateUsuariosTable extends Migration {
             $table->string('password');
             $table->enum('role', ['client', 'worker', 'admin']);
             $table->string('specialties')->nullable();
+            $table->json('categories')->nullable();
             $table->float('average_rating')->default(0)->nullable();
             $table->string('payment_methods')->nullable();
             $table->float('daily_value')->nullable();
