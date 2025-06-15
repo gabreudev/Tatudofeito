@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Enums\ServicoEnum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -190,10 +191,11 @@ class UsuarioController extends Controller
         }
     }
 
-    public function available()
+    public function available(Request $request)
     {
-        $usuarios = \App\Models\User::all(); // SELECT * FROM users
+        $category = $request->get('category');
 
+        $usuarios = User::whereJsonContains('categories', $category)->get(); // SELECT * FROM users
 
         return view('pages.available', compact('usuarios'));
     }

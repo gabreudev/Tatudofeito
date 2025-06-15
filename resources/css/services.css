@@ -20,7 +20,7 @@
 
 .services {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     width: 70%;
     padding: 20px;
