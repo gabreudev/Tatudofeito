@@ -16,7 +16,7 @@ enum ServicoEnum: string
     {
         return match($this) {
             self::CULINARIA => 'culinaria',
-            self::REPAROS => 'Reparos',
+            self::REPAROS => 'reparos',
             self::PINTURA => 'pintura',
             self::LIMPEZA => 'limpeza',
             self::MUDANCA => 'mudança',

@@ -20,3 +20,28 @@
     border-color: #B2822B;
     box-shadow: 0 0 0 3px rgba(178, 130, 43, 0.2);
 }
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Máximo de 4 por linha */
+    gap: 10px;
+    width: 100%;
+}
+
+.categories-grid label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.categories-grid input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.category-cell input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+}
+
+
